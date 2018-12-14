@@ -2,6 +2,10 @@
 
 Utility to format json from stdin as readible output.
 
+## Installing
+
+`go install github.com/M-Porter/jlog`
+
 ## Usage
 
 ```
