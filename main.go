@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
+	"golang.org/x/crypto/ssh/terminal"
 )
 
 var noColor bool
@@ -22,7 +23,17 @@ func unmarshalLine(line []byte) {
 	var strMap map[string]interface{}
 
 	json.Unmarshal(line, &strMap)
+	printDivider()
 	printMap(strMap, 0)
+}
+
+func printDivider() {
+	width, _, err := terminal.GetSize(int(os.Stdout.Fd()))
+	if err != nil {
+		width = 80
+	}
+	divider := strings.Repeat("-", width)
+	fmt.Printf("\n%s\n\n", divider)
 }
 
 func printMap(strMap map[string]interface{}, depth int) {
