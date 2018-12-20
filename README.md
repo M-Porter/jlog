@@ -4,7 +4,8 @@ Utility to format json from stdin as readible output.
 
 ## Installing
 
-`go install github.com/M-Porter/jlog`
+1. `go install github.com/M-Porter/jlog`
+1. `dep ensure`
 
 ## Usage
 
@@ -14,42 +15,37 @@ Usage of jlog:
       Supresses color output
 
   E.g.
-      tail -f example.log | jlog
+      tail -f error.log | jlog
 ```
 
 ## Example
 
-Given the following from stdin
+Given the following input
 
 ```json
-{ "message": "Ready to consume messages", "context": { "hostname": "docker.local.net", "application": "SearchIndexerConsumer" }, "level": 200, "level_name": "INFO", "channel": "rabbit", "datetime": { "date": "2018-12-14 17:23:56.045166", "timezone_type": 3, "timezone": "UTC" }, "extra": { "user_id": "", "logged_in_user": "", "site_id": "", "server_name": "docker.local.net", "remote_address": null, "git_branch": "live", "git_revision": "", "deployment": "", "deployment_subtype": "", "handler": "cli", "repo": "live", "http_host": "UNSET" } }
+{"date":"2012-01-01 02:00:01", "severity":"ERROR", "msg":"Foo failed"}
+{"date":"2012-01-01 02:04:02", "severity":"INFO", "msg":"Bar was successful"}
+{"date":"2012-01-01 02:10:12", "severity":"DEBUG", "msg":"Baz was notified"}
 ```
 
-The generated stdout would be
+The generated output would be
 
 ```
-message: Ready to consume messages
-context:
-    hostname: docker.local.net
-    application: SearchIndexerConsumer
-level: 200
-level_name: INFO
-channel: rabbit
-datetime:
-    date: 2018-12-14 17:23:56.045166
-    timezone_type:
-    timezone: UTC
-extra:
-    user_id:
-    logged_in_user:
-    site_id:
-    server_name: docker.local.net
-    remote_address: null
-    git_branch: live
-    git_revision:
-    deployment:
-    deployment_subtype:
-    handler: cli
-    repo: live
-    http_host: UNSET
+---------------------------------------------------------------------------------------------------------
+
+severity: ERROR
+msg: Foo failed
+date: 2012-01-01 02:00:01
+
+---------------------------------------------------------------------------------------------------------
+
+date: 2012-01-01 02:04:02
+severity: INFO
+msg: Bar was successful
+
+---------------------------------------------------------------------------------------------------------
+
+date: 2012-01-01 02:10:12
+severity: DEBUG
+msg: Baz was notified
 ```
