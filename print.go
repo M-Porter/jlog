@@ -24,7 +24,7 @@ func printMap(strMap map[string]interface{}, depth int) {
 		return
 	}
 
-	indent := strings.Repeat("\t", depth)
+	indent := strings.Repeat(config.indent, depth)
 	for k, v := range strMap {
 		if v == nil {
 			printValue(k, "null", indent)
